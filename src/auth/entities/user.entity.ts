@@ -1,3 +1,4 @@
+import { Deudor } from 'src/deudores/entities/deudore.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -5,11 +6,10 @@ import {
   Entity,
   OneToMany,
   PrimaryColumn,
-  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Product } from '../../products/entities';
 
-@Entity('users')
+@Entity('usuarios')
 export class User {
   @PrimaryColumn({ type: 'varchar', unique: true })
   id: string;
@@ -31,9 +31,11 @@ export class User {
     default: ['user'],
   })
   roles: string[];
-
+  
   @OneToMany(() => Product, (product) => product.user)
   product: Product;
+
+  
 
   @BeforeInsert()
   checkFieldsBeforeInsert() {

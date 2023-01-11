@@ -1,4 +1,7 @@
 import { PartialType } from '@nestjs/swagger';
-import { CreateDeudoreDto } from './create-deudore.dto';
+import { User } from 'src/auth/entities/user.entity';
+import { DeudorDTO } from './create-deudore.dto';
 
-export class UpdateDeudoreDto extends PartialType(CreateDeudoreDto) {}
+export class UpdateDeudoreDto extends PartialType(DeudorDTO) {
+  user: User;
+}
