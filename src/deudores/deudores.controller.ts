@@ -49,6 +49,7 @@ export class DeudoresController {
   }
 
   @Auth()
+  @Auth(ValidRoles.superUser)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.deudoresService.remove(id);
