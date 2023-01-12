@@ -1,10 +1,5 @@
 import { User } from 'src/auth/entities/user.entity';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity('deudores')
 export class Deudor {
@@ -29,7 +24,6 @@ export class Deudor {
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',
-
   })
   userDateInsert: Date;
 }

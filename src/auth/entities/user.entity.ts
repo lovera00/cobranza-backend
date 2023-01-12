@@ -31,11 +31,9 @@ export class User {
     default: ['user'],
   })
   roles: string[];
-  
+
   @OneToMany(() => Product, (product) => product.user)
   product: Product;
-
-  
 
   @BeforeInsert()
   checkFieldsBeforeInsert() {

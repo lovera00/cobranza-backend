@@ -1,4 +1,10 @@
-import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isUUID } from 'class-validator';
 import { User } from 'src/auth/entities/user.entity';
@@ -15,13 +21,13 @@ export class DeudoresService {
     @InjectRepository(Deudor)
     private readonly productRepository: Repository<Deudor>,
   ) {}
-  async create(createDeudoreDto: DeudorDTO,user: User) {
+  async create(createDeudoreDto: DeudorDTO, user: User) {
     try {
       const deudor = this.productRepository.create({
         ...createDeudoreDto,
         user,
       });
-      return await this.productRepository.save(deudor);      
+      return await this.productRepository.save(deudor);
     } catch (error) {
       this.handleDBExceptions(error);
     }
@@ -37,16 +43,14 @@ export class DeudoresService {
   }
 
   async findOne(term: string) {
-    let deudor:Deudor;
-    const queryBuilder = this.productRepository.createQueryBuilder('deudor'); 
-    deudor = await queryBuilder
-      .where('deudor.id = :id', { id: term })
-      .getOne();
-      if (!deudor) throw new NotFoundException(`Deudor with ${term} not found`);
+    let deudor: Deudor;
+    const queryBuilder = this.productRepository.createQueryBuilder('deudor');
+    deudor = await queryBuilder.where('deudor.id = :id', { id: term }).getOne();
+    if (!deudor) throw new NotFoundException(`Deudor with ${term} not found`);
     return deudor;
   }
 
-  async update(id: string, updateDeudoreDto: UpdateDeudoreDto,user: User) {
+  async update(id: string, updateDeudoreDto: UpdateDeudoreDto, user: User) {
     const deudor = await this.productRepository
       .createQueryBuilder('deudor')
       .where('deudor.id = :id', { id })

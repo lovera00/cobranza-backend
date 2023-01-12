@@ -26,7 +26,7 @@ export class DeudoresController {
   @Post()
   @Auth()
   create(@Body() createDeudoreDto: DeudorDTO, @GetUser() user: User) {
-    return this.deudoresService.create(createDeudoreDto,user);
+    return this.deudoresService.create(createDeudoreDto, user);
   }
 
   @Get()
@@ -44,8 +44,12 @@ export class DeudoresController {
   @Auth(ValidRoles.admin)
   @Auth(ValidRoles.superUser)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDeudoreDto: UpdateDeudoreDto,@GetUser() user: User) {
-    return this.deudoresService.update(id, updateDeudoreDto,user);
+  update(
+    @Param('id') id: string,
+    @Body() updateDeudoreDto: UpdateDeudoreDto,
+    @GetUser() user: User,
+  ) {
+    return this.deudoresService.update(id, updateDeudoreDto, user);
   }
 
   @Auth()

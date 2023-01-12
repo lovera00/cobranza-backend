@@ -33,24 +33,4 @@ export class DeudorDTO {
   @IsNotEmpty()
   @IsString()
   telefono: string;
-
-  @ApiProperty({ example: 1 })
-  @IsInt()
-  @Min(1)
-  idusuariocreacion: number;
-
-  @ApiProperty({ example: '2020-01-01' })
-  @IsNotEmpty()
-  @IsDateString()
-  fechacreacion: string;
-
-  @ApiProperty({ example: 2 })
-  @IsInt()
-  @Min(1)
-  idusuariomodificacion: number;
-
-  @ApiProperty({ example: '2020-02-01' })
-  @IsNotEmpty()
-  @IsDateString()
-  fechamodificacion: string;
 }
