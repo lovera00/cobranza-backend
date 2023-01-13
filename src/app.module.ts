@@ -11,6 +11,7 @@ import { SeedModule } from './seed/seed.module';
 import { FilesModule } from './files/files.module';
 import { AuthModule } from './auth/auth.module';
 import { DeudoresModule } from './deudores/deudores.module';
+import { ReferenciaPersonalModule } from './referencia-personal/referencia-personal.module';
 
 @Module({
   imports: [
@@ -42,6 +43,8 @@ import { DeudoresModule } from './deudores/deudores.module';
     AuthModule,
 
     DeudoresModule,
+
+    ReferenciaPersonalModule,
   ],
 })
 export class AppModule {}
