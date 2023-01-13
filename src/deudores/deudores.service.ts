@@ -19,15 +19,15 @@ export class DeudoresService {
   private readonly logger = new Logger('DeudoresService');
   constructor(
     @InjectRepository(Deudor)
-    private readonly productRepository: Repository<Deudor>,
+    private readonly deudorRepository: Repository<Deudor>,
   ) {}
   async create(createDeudoreDto: DeudorDTO, user: User) {
     try {
-      const deudor = this.productRepository.create({
+      const deudor = this.deudorRepository.create({
         ...createDeudoreDto,
         user,
       });
-      return await this.productRepository.save(deudor);
+      return await this.deudorRepository.save(deudor);
     } catch (error) {
       this.handleDBExceptions(error);
     }
@@ -35,7 +35,7 @@ export class DeudoresService {
 
   async findAll(paginationDto: PaginationDto) {
     const { limit = 10, offset = 0 } = paginationDto;
-    const deudores = await this.productRepository.find({
+    const deudores = await this.deudorRepository.find({
       take: limit,
       skip: offset,
     });
@@ -44,26 +44,26 @@ export class DeudoresService {
 
   async findOne(term: string) {
     let deudor: Deudor;
-    const queryBuilder = this.productRepository.createQueryBuilder('deudor');
+    const queryBuilder = this.deudorRepository.createQueryBuilder('deudor');
     deudor = await queryBuilder.where('deudor.id = :id', { id: term }).getOne();
     if (!deudor) throw new NotFoundException(`Deudor with ${term} not found`);
     return deudor;
   }
 
   async update(id: string, updateDeudoreDto: UpdateDeudoreDto, user: User) {
-    const deudor = await this.productRepository
+    const deudor = await this.deudorRepository
       .createQueryBuilder('deudor')
       .where('deudor.id = :id', { id })
       .getOne();
     if (!deudor) throw new NotFoundException(`Deudor with ${id} not found`);
     const updatedDeudor = Object.assign(deudor, updateDeudoreDto);
     updateDeudoreDto.user = user;
-    return await this.productRepository.save(updatedDeudor);
+    return await this.deudorRepository.save(updatedDeudor);
   }
 
   async remove(id: string) {
     const deudor = this.findOne(id);
-    await this.productRepository.delete(id);
+    await this.deudorRepository.delete(id);
     return deudor;
   }
 

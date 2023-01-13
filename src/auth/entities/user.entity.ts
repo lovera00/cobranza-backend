@@ -1,4 +1,3 @@
-import { Deudor } from 'src/deudores/entities/deudore.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
