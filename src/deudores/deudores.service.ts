@@ -20,7 +20,7 @@ export class DeudoresService {
   constructor(
     @InjectRepository(Deudor)
     private readonly deudorRepository: Repository<Deudor>,
-  ) {}
+  ) { }
   async create(createDeudoreDto: DeudorDTO, user: User) {
     try {
       const deudor = this.deudorRepository.create({
@@ -43,12 +43,21 @@ export class DeudoresService {
   }
 
   async findOne(term: string) {
-    let deudor: Deudor;
+    let deudor: Deudor | Deudor[]  ;
     const queryBuilder = this.deudorRepository.createQueryBuilder('deudor');
-    deudor = await queryBuilder.where('deudor.id = :id', { id: term }).getOne();
+    if (!isNaN(+term)) {
+      deudor = await queryBuilder.where('deudor.id = :id', { id: term }).getOne();
+    } else {
+      deudor = await queryBuilder.where(
+        'UPPER(deudor.nombre) like UPPER(:term) OR UPPER(deudor.direccion) like UPPER(:term) OR UPPER(deudor.correo) like UPPER(:term) OR UPPER(deudor.telefono) like UPPER(:term)',
+        { term: `%${term.toUpperCase()}%` }
+      ).getMany();
+    }
     if (!deudor) throw new NotFoundException(`Deudor with ${term} not found`);
     return deudor;
   }
+
+
 
   async update(id: string, updateDeudoreDto: UpdateDeudoreDto, user: User) {
     const deudor = await this.deudorRepository
