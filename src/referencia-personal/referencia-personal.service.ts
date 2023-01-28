@@ -44,16 +44,29 @@ export class ReferenciaPersonalService {
     return referenciaPersonales;
   }
 
-  async findOne(term: string) {
+  async findByDeudor(idDeudor: string) {
+    let referenciaPersonal: ReferenciaPersonal[];
+    const queryBuilder = this.referenciaPersonalRepository.createQueryBuilder(
+      'referencia_personal',
+    );
+    referenciaPersonal = await queryBuilder
+      .where('referencia_personal.deudorId = :idDeudor', { idDeudor: idDeudor })
+      .getMany();
+    if (!referenciaPersonal)
+      throw new NotFoundException(`ReferenciaPersonal with ${idDeudor} not found`);
+    return referenciaPersonal;
+  }
+
+  async findOne(id: string) {
     let referenciaPersonal: ReferenciaPersonal;
     const queryBuilder = this.referenciaPersonalRepository.createQueryBuilder(
       'referencia_personal',
     );
     referenciaPersonal = await queryBuilder
-      .where('referencia_personal.id = :id', { id: term })
+      .where('referencia_personal.id = :id', { id: id })
       .getOne();
     if (!referenciaPersonal)
-      throw new NotFoundException(`ReferenciaPersonal with ${term} not found`);
+      throw new NotFoundException(`ReferenciaPersonal with ${id} not found`);
     return referenciaPersonal;
   }
 

@@ -42,10 +42,16 @@ export class ReferenciaPersonalController {
     return this.referenciaPersonalService.findAll(paginationDto);
   }
 
-  @Get(':term')
-  findOne(@Param('term') term: string) {
-    return this.referenciaPersonalService.findOne(term);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.referenciaPersonalService.findOne(id);
   }
+
+  @Get('deudor/:id')
+  findByDeudor(@Param('id') id: string) {
+    return this.referenciaPersonalService.findByDeudor(id);
+  }
+
 
   @Auth()
   @Auth(ValidRoles.user)
