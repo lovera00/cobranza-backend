@@ -6,13 +6,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { isUUID } from 'class-validator';
 import { User } from 'src/auth/entities/user.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { Repository } from 'typeorm';
 import { DeudorDTO } from './dto/create-deudore.dto';
 import { UpdateDeudoreDto } from './dto/update-deudore.dto';
-import { Deudor } from './entities/deudore.entity';
+import { Deudor } from './entities/deudores.entity';
 
 @Injectable()
 export class DeudoresService {
@@ -46,10 +45,10 @@ export class DeudoresService {
     let deudor: Deudor | Deudor[]  ;
     const queryBuilder = this.deudorRepository.createQueryBuilder('deudor');
     if (!isNaN(+term)) {
-      deudor = await queryBuilder.where('deudor.id = :id', { id: term }).getOne();
+      deudor = await queryBuilder.where('deudor.id = :id', { id: term }).getMany();
     } else {
       deudor = await queryBuilder.where(
-        'UPPER(deudor.nombre) like UPPER(:term) OR UPPER(deudor.direccion) like UPPER(:term) OR UPPER(deudor.correo) like UPPER(:term) OR UPPER(deudor.telefono) like UPPER(:term)',
+        'UPPER(deudor.nombres) like UPPER(:term) OR UPPER(deudor.apellidos) like UPPER(:term) OR UPPER(deudor.fullname) like UPPER(:term) OR UPPER(deudor.cedula) like UPPER(:term)',
         { term: `%${term.toUpperCase()}%` }
       ).getMany();
     }

@@ -2,28 +2,28 @@ import { IsNotEmpty, IsString, IsEmail, IsInt, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class DeudorDTO {
-  @ApiProperty({ example: 1 })
-  @IsInt()
-  @Min(1)
-  id: number;
 
-  @ApiProperty({ example: 'Juan Pérez' })
+  @ApiProperty({ example: 'Juan Roman' })
   @IsNotEmpty()
   @IsString()
-  nombre: string;
+  nombres: string;
 
-  @ApiProperty({ example: 'Calle Falsa 123' })
+  @ApiProperty({ example: 'Riquelme Gonzales' })
   @IsNotEmpty()
   @IsString()
-  direccion: string;
+  apellidos: string;
 
-  @ApiProperty({ example: 'juanperez@example.com' })
-  @IsNotEmpty()
-  @IsEmail()
-  correo: string;
-
-  @ApiProperty({ example: '555-555-555' })
+  @ApiProperty({ example: 'Juan Roman , Riquelme Gonzales' })
   @IsNotEmpty()
   @IsString()
-  telefono: string;
+  fullname: string;
+
+  @ApiProperty({ example: '1234567' })
+  @IsNotEmpty()
+  cedula: string;
+
+  @ApiProperty({ example: '01/01/1999' })
+  @IsNotEmpty()
+  @IsString()
+  nacimiento: string;
 }

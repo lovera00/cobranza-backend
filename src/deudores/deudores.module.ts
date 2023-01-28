@@ -3,8 +3,7 @@ import { DeudoresService } from './deudores.service';
 import { DeudoresController } from './deudores.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
-import { ProductsService } from 'src/products/products.service';
-import { Deudor } from './entities/deudore.entity';
+import { Deudor } from './entities/deudores.entity';
 
 @Module({
   controllers: [DeudoresController],

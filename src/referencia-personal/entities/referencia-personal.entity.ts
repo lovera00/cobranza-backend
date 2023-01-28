@@ -1,5 +1,5 @@
 import { User } from 'src/auth/entities/user.entity';
-import { Deudor } from 'src/deudores/entities/deudore.entity';
+import { Deudor } from 'src/deudores/entities/deudores.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()

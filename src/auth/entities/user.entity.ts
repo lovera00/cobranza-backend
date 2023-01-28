@@ -6,7 +6,6 @@ import {
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
-import { Product } from '../../products/entities';
 
 @Entity('usuarios')
 export class User {
@@ -30,9 +29,6 @@ export class User {
     default: ['user'],
   })
   roles: string[];
-
-  @OneToMany(() => Product, (product) => product.user)
-  product: Product;
 
   @BeforeInsert()
   checkFieldsBeforeInsert() {

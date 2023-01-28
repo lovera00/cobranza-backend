@@ -7,16 +7,19 @@ export class Deudor {
   id: number;
 
   @Column({ length: 255 })
-  nombre: string;
+  nombres: string;
 
   @Column({ length: 255 })
-  direccion: string;
+  apellidos: string;
 
   @Column({ length: 255 })
-  correo: string;
+  fullname: string;
 
   @Column({ length: 255 })
-  telefono: string;
+  cedula: string;
+  
+  @Column({ length: 255 })
+  nacimiento: string;
 
   @ManyToOne(() => User, (user) => user.id)
   user: User;
