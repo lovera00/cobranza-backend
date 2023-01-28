@@ -34,9 +34,14 @@ export class DeudoresController {
     return this.deudoresService.findAll(paginationDto);
   }
 
-  @Get(':term')
-  findOne(@Param('term') term: string) {
-    return this.deudoresService.findOne(term);
+  @Get('/search/:term')
+  findOne(@Param('term') term: string,@Query() paginationDto: PaginationDto) {
+    return this.deudoresService.findOne(term,paginationDto);
+  }
+
+  @Get(':id')
+  findOneById(@Param('id') id: string) {
+    return this.deudoresService.findOneById(+id);
   }
 
   @Auth()

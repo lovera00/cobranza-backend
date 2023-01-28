@@ -19,7 +19,7 @@ export class DeudoresService {
   constructor(
     @InjectRepository(Deudor)
     private readonly deudorRepository: Repository<Deudor>,
-  ) { }
+  ) {}
   async create(createDeudoreDto: DeudorDTO, user: User) {
     try {
       const deudor = this.deudorRepository.create({
@@ -41,22 +41,28 @@ export class DeudoresService {
     return deudores;
   }
 
-  async findOne(term: string) {
-    let deudor: Deudor | Deudor[]  ;
+  async findOneById(id: number): Promise<Deudor> {
     const queryBuilder = this.deudorRepository.createQueryBuilder('deudor');
-    if (!isNaN(+term)) {
-      deudor = await queryBuilder.where('deudor.id = :id', { id: term }).getMany();
-    } else {
-      deudor = await queryBuilder.where(
-        'UPPER(deudor.nombres) like UPPER(:term) OR UPPER(deudor.apellidos) like UPPER(:term) OR UPPER(deudor.fullname) like UPPER(:term) OR UPPER(deudor.cedula) like UPPER(:term)',
-        { term: `%${term.toUpperCase()}%` }
-      ).getMany();
-    }
-    if (!deudor) throw new NotFoundException(`Deudor with ${term} not found`);
+    const deudor = await queryBuilder.where('deudor.id = :id', { id }).getOne();
+    if (!deudor) throw new NotFoundException(`Deudor with id: ${id} not found`);
     return deudor;
   }
 
-
+  async findOne(term: string, paginationDto: PaginationDto) {
+    const { limit = 10, offset = 0 } = paginationDto;
+    let deudor: Deudor | Deudor[];
+    const queryBuilder = this.deudorRepository.createQueryBuilder('deudor');
+    deudor = await queryBuilder
+      .where(
+        'UPPER(deudor.nombres) like UPPER(:term) OR UPPER(deudor.apellidos) like UPPER(:term) OR UPPER(deudor.fullname) like UPPER(:term) OR UPPER(deudor.cedula) like UPPER(:term)',
+        { term: `%${term.toUpperCase()}%` },
+      )
+      .take(limit)
+      .skip(offset)
+      .getMany();
+    if (!deudor) throw new NotFoundException(`Deudor with ${term} not found`);
+    return deudor;
+  }
 
   async update(id: string, updateDeudoreDto: UpdateDeudoreDto, user: User) {
     const deudor = await this.deudorRepository
@@ -70,7 +76,7 @@ export class DeudoresService {
   }
 
   async remove(id: string) {
-    const deudor = this.findOne(id);
+    const deudor = this.findOneById(+id);
     await this.deudorRepository.delete(id);
     return deudor;
   }
