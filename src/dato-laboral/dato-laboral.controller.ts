@@ -7,10 +7,13 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { DatoLaboralService } from './dato-laboral.service';
 import { CreateDatoLaboralDto } from './dto/create-dato-laboral.dto';
 import { UpdateDatoLaboralDto } from './dto/update-dato-laboral.dto';
 
+@ApiTags('Datos Laborales')
+@ApiBearerAuth()
 @Controller('dato-laboral')
 export class DatoLaboralController {
   constructor(private readonly datoLaboralService: DatoLaboralService) {}
