@@ -52,7 +52,6 @@ export class ReferenciaPersonalController {
     return this.referenciaPersonalService.findByDeudor(id);
   }
 
-
   @Auth()
   @Auth(ValidRoles.user)
   @Auth(ValidRoles.admin)

@@ -53,7 +53,9 @@ export class ReferenciaPersonalService {
       .where('referencia_personal.deudorId = :idDeudor', { idDeudor: idDeudor })
       .getMany();
     if (!referenciaPersonal)
-      throw new NotFoundException(`ReferenciaPersonal with ${idDeudor} not found`);
+      throw new NotFoundException(
+        `ReferenciaPersonal with ${idDeudor} not found`,
+      );
     return referenciaPersonal;
   }
 
