@@ -25,8 +25,11 @@ export class DatoLaboralController {
 
   @Post()
   @Auth()
-  create(@Body() createDatoLaboralDto: CreateDatoLaboralDto,@GetUser() user: User) {
-    return this.datoLaboralService.create(createDatoLaboralDto,user);
+  create(
+    @Body() createDatoLaboralDto: CreateDatoLaboralDto,
+    @GetUser() user: User,
+  ) {
+    return this.datoLaboralService.create(createDatoLaboralDto, user);
   }
 
   @Get()

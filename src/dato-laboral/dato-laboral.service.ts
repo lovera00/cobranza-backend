@@ -44,9 +44,8 @@ export class DatoLaboralService {
 
   async findByDeudor(idDeudor: string) {
     let datoLaboral: DatoLaboral[];
-    const queryBuilder = this.datosLaboralesRepository.createQueryBuilder(
-      'dato_laboral',
-    );
+    const queryBuilder =
+      this.datosLaboralesRepository.createQueryBuilder('dato_laboral');
     datoLaboral = await queryBuilder
       .where('dato_laboral.deudorId = :idDeudor', { idDeudor: idDeudor })
       .getMany();
@@ -56,10 +55,9 @@ export class DatoLaboralService {
   }
 
   async findOne(id: string) {
-    let datoLaboral:DatoLaboral;
-    const queryBuilder = this.datosLaboralesRepository.createQueryBuilder(
-      'dato_laboral',
-    );
+    let datoLaboral: DatoLaboral;
+    const queryBuilder =
+      this.datosLaboralesRepository.createQueryBuilder('dato_laboral');
     datoLaboral = await queryBuilder
       .where('dato_laboral.id = :id', { id: id })
       .getOne();
@@ -79,7 +77,7 @@ export class DatoLaboralService {
   }
 
   async remove(id: string) {
-    const dato_laboral = this.findOne(id)
+    const dato_laboral = this.findOne(id);
     if (!dato_laboral)
       throw new NotFoundException(`DatoLaboral with ${id} not found`);
     return await this.datosLaboralesRepository.delete(id);
