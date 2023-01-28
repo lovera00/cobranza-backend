@@ -47,9 +47,9 @@ export class ReferenciaPersonalController {
     return this.referenciaPersonalService.findOne(id);
   }
 
-  @Get('deudor/:id')
-  findByDeudor(@Param('id') id: string) {
-    return this.referenciaPersonalService.findByDeudor(id);
+  @Get('deudor/:idDeudor')
+  findByDeudor(@Param('idDeudor') idDeudor: string) {
+    return this.referenciaPersonalService.findByDeudor(idDeudor);
   }
 
   @Auth()
