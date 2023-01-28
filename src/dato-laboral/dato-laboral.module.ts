@@ -4,6 +4,6 @@ import { DatoLaboralController } from './dato-laboral.controller';
 
 @Module({
   controllers: [DatoLaboralController],
-  providers: [DatoLaboralService]
+  providers: [DatoLaboralService],
 })
 export class DatoLaboralModule {}

@@ -2,7 +2,6 @@ import { IsNotEmpty, IsString, IsEmail, IsInt, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class DeudorDTO {
-
   @ApiProperty({ example: 'Juan Roman' })
   @IsNotEmpty()
   @IsString()

@@ -18,8 +18,6 @@ export class SeedService {
     return 'SEED EXECUTED';
   }
 
-  
-
   private async insertUsers() {
     const seedUsers = initialData.users;
 
@@ -33,6 +31,4 @@ export class SeedService {
 
     return dbUsers[0];
   }
-
-  
 }

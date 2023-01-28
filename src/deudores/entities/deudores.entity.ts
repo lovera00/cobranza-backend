@@ -17,7 +17,7 @@ export class Deudor {
 
   @Column({ length: 255 })
   cedula: string;
-  
+
   @Column({ length: 255 })
   nacimiento: string;
 
