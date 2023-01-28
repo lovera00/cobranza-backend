@@ -9,5 +9,6 @@ import { AuthModule } from 'src/auth/auth.module';
   controllers: [DatoLaboralController],
   providers: [DatoLaboralService],
   imports: [TypeOrmModule.forFeature([DatoLaboral]), AuthModule],
+  exports: [TypeOrmModule]
 })
 export class DatoLaboralModule {}
