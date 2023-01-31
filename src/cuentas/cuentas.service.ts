@@ -65,7 +65,7 @@ export class CuentasService {
     return cuenta;
   }
 
-  async update(id: number, updateCuentaDto: UpdateCuentaDto,user: User) {
+  async update(id: number, updateCuentaDto: UpdateCuentaDto, user: User) {
     const cuenta = await this.cuentaRepository
       .createQueryBuilder('cuenta')
       .where('cuenta.id = :id', { id })

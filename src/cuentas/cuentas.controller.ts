@@ -53,8 +53,12 @@ export class CuentasController {
   @Auth(ValidRoles.admin)
   @Auth(ValidRoles.superUser)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCuentaDto: UpdateCuentaDto, @GetUser() user: User) {
-    return this.cuentasService.update(+id, updateCuentaDto,user);
+  update(
+    @Param('id') id: string,
+    @Body() updateCuentaDto: UpdateCuentaDto,
+    @GetUser() user: User,
+  ) {
+    return this.cuentasService.update(+id, updateCuentaDto, user);
   }
 
   @Delete(':id')
