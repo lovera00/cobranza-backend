@@ -9,6 +9,6 @@ import { Deudor } from './entities/deudores.entity';
   controllers: [DeudoresController],
   providers: [DeudoresService],
   imports: [TypeOrmModule.forFeature([Deudor]), AuthModule],
-  exports: [TypeOrmModule]
+  exports: [TypeOrmModule],
 })
 export class DeudoresModule {}

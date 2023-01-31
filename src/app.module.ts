@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { DeudoresModule } from './deudores/deudores.module';
 import { ReferenciaPersonalModule } from './referencia-personal/referencia-personal.module';
 import { DatoLaboralModule } from './dato-laboral/dato-laboral.module';
+import { CuentasModule } from './cuentas/cuentas.module';
 
 @Module({
   imports: [
@@ -42,6 +43,8 @@ import { DatoLaboralModule } from './dato-laboral/dato-laboral.module';
     ReferenciaPersonalModule,
 
     DatoLaboralModule,
+
+    CuentasModule,
   ],
 })
 export class AppModule {}
