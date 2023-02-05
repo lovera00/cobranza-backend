@@ -9,7 +9,7 @@ export class GestionService {
     return 'This action adds a new gestion';
   }
 
-  async findAll() : Promise<Gestion[]> {
+  async findAll(): Promise<Gestion[]> {
     return [];
   }
 

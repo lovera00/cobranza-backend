@@ -1,7 +1,7 @@
 import { User } from 'src/auth/entities/user.entity';
 import { Cuenta } from 'src/cuentas/entities/cuenta.entity';
 import { Deudor } from 'src/deudores/entities/deudores.entity';
-import { TipoGestion } from './tipoGestion.entity';
+import { TipoGestion } from 'src/tipo-gestion/entities/tipo-gestion.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity('gestiones')
