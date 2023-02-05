@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGestionDto } from './dto/create-gestion.dto';
 import { UpdateGestionDto } from './dto/update-gestion.dto';
+import { Gestion } from './entities/gestion.entity';
 
 @Injectable()
 export class GestionService {
@@ -8,19 +9,19 @@ export class GestionService {
     return 'This action adds a new gestion';
   }
 
-  findAll() {
+  async findAll() : Promise<Gestion[]> {
     return [];
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return `This action returns a #${id} gestion`;
   }
 
-  update(id: number, updateGestionDto: UpdateGestionDto) {
+  async update(id: number, updateGestionDto: UpdateGestionDto) {
     return `This action updates a #${id} gestion`;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return `This action removes a #${id} gestion`;
   }
 }
