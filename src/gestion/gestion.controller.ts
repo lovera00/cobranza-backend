@@ -1,42 +1,30 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { GestionService } from './gestion.service';
 import { CreateGestionDto } from './dto/create-gestion.dto';
-import { UpdateGestionDto } from './dto/update-gestion.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Auth, GetUser } from 'src/auth/decorators';
+import { User } from 'src/auth/entities/user.entity';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
+@ApiTags('Gestiones')
+@ApiBearerAuth()
 @Controller('gestion')
 export class GestionController {
   constructor(private readonly gestionService: GestionService) {}
 
   @Post()
-  create(@Body() createGestionDto: CreateGestionDto) {
-    return this.gestionService.create(createGestionDto);
+  @Auth()
+  create(@Body() createGestionDto: CreateGestionDto, @GetUser() user: User) {
+    return this.gestionService.create(createGestionDto, user);
   }
 
   @Get()
-  findAll() {
-    return this.gestionService.findAll();
+  findAll(@Query() paginationDto: PaginationDto) {
+    return this.gestionService.findAll(paginationDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.gestionService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGestionDto: UpdateGestionDto) {
-    return this.gestionService.update(+id, updateGestionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.gestionService.remove(+id);
+  @Get('deudor/:idDeudor')
+  findGestionByDeudor(@Param('idDeudor') idDeudor: string) {
+    return this.gestionService.findGestionByDeudor(idDeudor);
   }
 }

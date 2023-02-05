@@ -1,27 +1,58 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGestionDto } from './dto/create-gestion.dto';
-import { UpdateGestionDto } from './dto/update-gestion.dto';
 import { Gestion } from './entities/gestion.entity';
-
+import {
+  BadRequestException,
+  InternalServerErrorException,
+} from '@nestjs/common/exceptions';
+import { Logger } from '@nestjs/common/services';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/auth/entities/user.entity';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { Repository } from 'typeorm';
 @Injectable()
 export class GestionService {
-  create(createGestionDto: CreateGestionDto) {
-    return 'This action adds a new gestion';
+  private readonly logger = new Logger('GestionService');
+  constructor(
+    @InjectRepository(Gestion)
+    private readonly gestionRepository: Repository<Gestion>,
+  ) {}
+
+  async create(createGestionDto: CreateGestionDto, user: User) {
+    try {
+      const gestion = this.gestionRepository.create({
+        ...createGestionDto,
+        user,
+      });
+      return await this.gestionRepository.save(gestion);
+    } catch (error) {
+      this.handleDBExceptions(error);
+    }
   }
 
-  async findAll(): Promise<Gestion[]> {
-    return [];
+  async findAll(paginationDto: PaginationDto): Promise<Gestion[]> {
+    const { limit = 10, offset = 0 } = paginationDto;
+    const gestiones = this.gestionRepository.find({
+      take: limit,
+      skip: offset,
+    });
+    return gestiones;
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} gestion`;
+  async findGestionByDeudor(id: string) {
+    const gestiones = this.gestionRepository.find({
+      where: { deudor: +id },
+    });
+    return gestiones;
   }
 
-  async update(id: number, updateGestionDto: UpdateGestionDto) {
-    return `This action updates a #${id} gestion`;
-  }
+  private handleDBExceptions(error: any) {
+    if (error.code === '23505') throw new BadRequestException(error.detail);
 
-  async remove(id: number) {
-    return `This action removes a #${id} gestion`;
+    this.logger.error(error);
+    // console.log(error)
+    throw new InternalServerErrorException(
+      'Unexpected error, check server logs',
+    );
   }
 }

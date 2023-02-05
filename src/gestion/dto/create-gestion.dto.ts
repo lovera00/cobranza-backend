@@ -4,9 +4,14 @@ export class CreateGestionDto {
   @ApiProperty({ example: '2021-01-01' })
   @IsNotEmpty()
   @IsDateString()
-  fechaProximaGestion: Date;
+  fechaAgendamiento: Date;
 
-  @ApiProperty({ example: 'Llamada' })
+  @ApiProperty({ example: 'observacion' })
+  @IsNotEmpty()
+  @IsString()
+  observacion: string;
+
+  @ApiProperty({ example: '1' })
   @IsNotEmpty()
   @IsInt()
   tipoGestion: number;
@@ -19,5 +24,5 @@ export class CreateGestionDto {
   @ApiProperty({ example: '1' })
   @IsNotEmpty()
   @IsInt()
-  user: number;
+  cuenta: number;
 }

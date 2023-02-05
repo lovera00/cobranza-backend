@@ -38,16 +38,15 @@ export class Gestion {
   @ManyToOne(() => TipoGestion, (tipoGestion) => tipoGestion.id)
   tipoGestion: number;
 
-  //campos de auditoria
-  @Column()
-  userInsert: string;
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',
   })
   userDateInsert: Date;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   userUpdate: string;
 
   @Column({
