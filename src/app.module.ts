@@ -12,6 +12,7 @@ import { DeudoresModule } from './deudores/deudores.module';
 import { ReferenciaPersonalModule } from './referencia-personal/referencia-personal.module';
 import { DatoLaboralModule } from './dato-laboral/dato-laboral.module';
 import { CuentasModule } from './cuentas/cuentas.module';
+import { GestionModule } from './gestion/gestion.module';
 
 @Module({
   imports: [
@@ -45,6 +46,8 @@ import { CuentasModule } from './cuentas/cuentas.module';
     DatoLaboralModule,
 
     CuentasModule,
+
+    GestionModule,
   ],
 })
 export class AppModule {}

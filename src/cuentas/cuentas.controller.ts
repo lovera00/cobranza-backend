@@ -9,7 +9,6 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
-import { get } from 'http';
 import { Auth, GetUser } from 'src/auth/decorators';
 import { User } from 'src/auth/entities/user.entity';
 import { ValidRoles } from 'src/auth/interfaces';
