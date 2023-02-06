@@ -13,6 +13,7 @@ import { ReferenciaPersonalModule } from './referencia-personal/referencia-perso
 import { DatoLaboralModule } from './dato-laboral/dato-laboral.module';
 import { CuentasModule } from './cuentas/cuentas.module';
 import { TipoGestionModule } from './tipo-gestion/tipo-gestion.module';
+import { GestionModule } from './gestion/gestion.module';
 
 @Module({
   imports: [
@@ -48,6 +49,8 @@ import { TipoGestionModule } from './tipo-gestion/tipo-gestion.module';
     CuentasModule,
 
     TipoGestionModule,
+
+    GestionModule,
   ],
 })
 export class AppModule {}
